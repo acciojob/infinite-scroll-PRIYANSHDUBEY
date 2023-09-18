@@ -7,9 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to add a list item
   function addListItem() {
     var ul = document.getElementById("myList");
-    var li = document.createElement("li");
-    li.appendChild(document.createTextNode("List Item"));
-    ul.appendChild(li);
+    if (ul) {
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode("List Item"));
+      ul.appendChild(li);
+    }
   }
   
   // Add the initial list items
@@ -20,10 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener to check if user has reached the end of the list
   document.addEventListener("scroll", function () {
     var ul = document.getElementById("myList");
-    var lastLi = ul.lastElementChild;
+    var lastLi = ul ? ul.lastElementChild : null;
     
     // Check if the last list item is in the viewport
-    if (isInViewport(lastLi)) {
+    if (lastLi && isInViewport(lastLi)) {
       // Add more items when the user reaches the end
       for (var i = 0; i < itemsToAdd; i++) {
         addListItem();
